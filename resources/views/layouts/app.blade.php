@@ -7,7 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
-    @yield('header')
+    {{-- Menu de navegação compartilhado por todas as views (Desafio Tema 4) --}}
+    @include('partials.nav')
 
     <main class="flex-grow container mx-auto px-4 py-8">
         @yield('content')

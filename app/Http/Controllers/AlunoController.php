@@ -11,7 +11,14 @@ class AlunoController extends Controller
      */
     public function index()
     {
-        return view('alunos.index');
+        // Dados de exemplo para visualização inicial
+        $alunos = [
+            ['id' => 1, 'nome' => 'Ana Clara Silva', 'email' => 'ana@email.com', 'curso' => 'Engenharia de Software'],
+            ['id' => 2, 'nome' => 'Bruno Oliveira', 'email' => 'bruno@email.com', 'curso' => 'Ciência da Computação'],
+            ['id' => 3, 'nome' => 'Carlos Eduardo', 'email' => 'carlos@email.com', 'curso' => 'Sistemas de Informação'],
+        ];
+
+        return view('alunos.index', compact('alunos'));
     }
 
     /**

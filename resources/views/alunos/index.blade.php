@@ -10,6 +10,40 @@
             + Cadastrar Aluno
         </a>
     </div>
-    <p class="text-gray-600">Página de listagem de alunos.</p>
+
+    {{-- Utilizando @if e @foreach conforme ATV 9 --}}
+    @if(isset($alunos) && count($alunos) > 0)
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 border">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Curso</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach($alunos as $aluno)
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $aluno['id'] ?? $aluno->id }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">{{ $aluno['nome'] ?? $aluno->nome }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ $aluno['email'] ?? $aluno->email }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ $aluno['curso'] ?? $aluno->curso }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                <a href="{{ route('alunos.show', $aluno['id'] ?? $aluno->id) }}" class="text-blue-600 hover:underline">Ver</a>
+                                <a href="{{ route('alunos.edit', $aluno['id'] ?? $aluno->id) }}" class="text-yellow-600 hover:underline">Editar</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    @else
+        <div class="p-4 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-700">
+            <p>Nenhum aluno encontrado no momento.</p>
+        </div>
+    @endif
 </div>
 @endsection
