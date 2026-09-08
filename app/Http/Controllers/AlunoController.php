@@ -11,7 +11,7 @@ class AlunoController extends Controller
      */
     public function index()
     {
-        return 'Listagem de alunos (index)';
+        return view('alunos.index');
     }
 
     /**
@@ -19,7 +19,7 @@ class AlunoController extends Controller
      */
     public function create()
     {
-        return 'Formulário de cadastro de aluno (create)';
+        return view('alunos.create');
     }
 
     /**
@@ -27,7 +27,7 @@ class AlunoController extends Controller
      */
     public function store(Request $request)
     {
-        return 'Aluno cadastrado com sucesso (store)';
+        return redirect()->route('alunos.index');
     }
 
     /**
@@ -35,7 +35,7 @@ class AlunoController extends Controller
      */
     public function show(string $id)
     {
-        return "Exibindo detalhes do aluno com ID: {$id} (show)";
+        return view('alunos.show', ['id' => $id]);
     }
 
     /**
@@ -43,7 +43,7 @@ class AlunoController extends Controller
      */
     public function edit(string $id)
     {
-        return "Formulário de edição do aluno com ID: {$id} (edit)";
+        return view('alunos.edit', ['id' => $id]);
     }
 
     /**
@@ -51,7 +51,7 @@ class AlunoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return "Aluno com ID: {$id} atualizado com sucesso (update)";
+        return redirect()->route('alunos.index');
     }
 
     /**
@@ -59,6 +59,6 @@ class AlunoController extends Controller
      */
     public function destroy(string $id)
     {
-        return "Aluno com ID: {$id} removido com sucesso (destroy)";
+        return redirect()->route('alunos.index');
     }
 }
