@@ -18,3 +18,16 @@ Route::get('/alunos', function () {
 Route::get('/contato', function () {
     return 'Página de Contato: Entre em contato conosco.';
 });
+
+// TEMA 1 - ATV 2: Rotas com parâmetro retornando texto
+Route::get('/produto/{id}', function ($id) {
+    return "Detalhes do Produto com ID: {$id}";
+});
+
+Route::get('/categoria/{id}', function ($id) {
+    return "Detalhes da Categoria com ID: {$id}";
+});
+
+Route::get('/usuario/{id}', function ($id) {
+    return "Detalhes do Usuário com ID: {$id}";
+});
