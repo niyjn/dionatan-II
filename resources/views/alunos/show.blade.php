@@ -30,6 +30,14 @@
             <span class="text-xs text-gray-500 uppercase tracking-wider block">Curso</span>
             <p class="text-gray-700">{{ $aluno->curso }}</p>
         </div>
+        @if($aluno->cursoRelacionado)
+            <div>
+                <span class="text-xs text-gray-500 uppercase tracking-wider block">Curso Vinculado (Relacionamento)</span>
+                <a href="{{ route('cursos.alunos', $aluno->cursoRelacionado) }}" class="text-blue-600 hover:underline font-semibold">
+                    {{ $aluno->cursoRelacionado->nome }} (Ver todos alunos deste curso &rarr;)
+                </a>
+            </div>
+        @endif
         <div>
             <span class="text-xs text-gray-500 uppercase tracking-wider block">Data de Cadastro</span>
             <p class="text-gray-500 text-sm">{{ $aluno->created_at ? $aluno->created_at->format('d/m/Y H:i') : 'N/A' }}</p>
@@ -37,16 +45,21 @@
     </div>
 
     <div class="mt-6 flex justify-between items-center">
-        <a href="{{ route('alunos.edit', $aluno) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium px-4 py-2 rounded">
-            Editar Cadastro
-        </a>
-        <form action="{{ route('alunos.destroy', $aluno) }}" method="POST" onsubmit="return confirm('Deseja realmente excluir este aluno?');">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-medium px-4 py-2 rounded">
-                Excluir
-            </button>
-        </form>
+        @can('update', $aluno)
+            <a href="{{ route('alunos.edit', $aluno) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium px-4 py-2 rounded">
+                Editar Cadastro
+            </a>
+        @endcan
+
+        @can('delete', $aluno)
+            <form action="{{ route('alunos.destroy', $aluno) }}" method="POST" onsubmit="return confirm('Deseja realmente excluir este aluno?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-medium px-4 py-2 rounded">
+                    Excluir
+                </button>
+            </form>
+        @endcan
     </div>
 </div>
 @endsection

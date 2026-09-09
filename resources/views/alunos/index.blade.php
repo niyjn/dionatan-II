@@ -7,11 +7,14 @@
     <div class="flex justify-between items-center mb-6">
         <div>
             <h1 class="text-2xl font-bold text-gray-800">Alunos Matriculados</h1>
-            <p class="text-sm text-gray-500">Gerenciamento completo de alunos (CRUD)</p>
+            <p class="text-sm text-gray-500">Gerenciamento completo de alunos (com proteção de Policies por Role)</p>
         </div>
-        <a href="{{ route('alunos.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded shadow transition">
-            + Novo Aluno
-        </a>
+        {{-- TEMA 12 - ATV 23: Apenas Admin pode ver o botão de cadastrar novo aluno --}}
+        @can('create', App\Models\Aluno::class)
+            <a href="{{ route('alunos.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded shadow transition">
+                + Novo Aluno (Admin)
+            </a>
+        @endcan
     </div>
 
     @if(session('success'))
@@ -43,12 +46,20 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ $aluno->curso }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium space-x-2">
                                 <a href="{{ route('alunos.show', $aluno) }}" class="text-blue-600 hover:text-blue-900">Ver</a>
-                                <a href="{{ route('alunos.edit', $aluno) }}" class="text-yellow-600 hover:text-yellow-900">Editar</a>
-                                <form action="{{ route('alunos.destroy', $aluno) }}" method="POST" class="inline" onsubmit="return confirm('Tem certeza que deseja excluir este aluno?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-900">Excluir</button>
-                                </form>
+
+                                {{-- TEMA 12 - ATV 23: Professor e Admin podem editar --}}
+                                @can('update', $aluno)
+                                    <a href="{{ route('alunos.edit', $aluno) }}" class="text-yellow-600 hover:text-yellow-900">Editar</a>
+                                @endcan
+
+                                {{-- TEMA 12 - ATV 23: Apenas Admin pode excluir --}}
+                                @can('delete', $aluno)
+                                    <form action="{{ route('alunos.destroy', $aluno) }}" method="POST" class="inline" onsubmit="return confirm('Tem certeza que deseja excluir este aluno?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:text-red-900">Excluir</button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
