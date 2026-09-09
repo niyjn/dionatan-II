@@ -1,58 +1,134 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Projeto Acadêmico - Sistema de Gestão Escolar (Laravel + Breeze)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este repositório contém a resolução integral de todas as atividades propostas na disciplina, implementado em **Laravel 12** utilizando **Laravel Breeze** (stack Blade), **Tailwind CSS**, banco de dados SQLite/MySQL e recursos avançados do framework (Eloquent Scopes, Relacionamentos, Seeders, Form Requests, Middlewares e Policies).
 
-## About Laravel
+> **Padrão de entrega seguido à risca:**
+> - **Cada TEMA é uma BRANCH**
+> - **Cada ATIVIDADE (ATV) é um COMMIT**
+> - A branch `main` consolida o projeto completo finalizado.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🌿 Estrutura de Branches e Temas
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| Tema | Branch | Descrição Resumida |
+| :--- | :--- | :--- |
+| **Tema 1** | `tema-1` / `tema-1-rotas` | Rotas simples e rotas com parâmetros |
+| **Tema 2** | `tema-2` / `tema-2-controllers` | Criação do AlunoController e mapeamento dos 7 métodos de CRUD |
+| **Tema 3** | `tema-3` / `tema-3-views` | Criação da pasta de views e páginas principais |
+| **Tema 4** | `tema-4` / `tema-4-blade` | Layout base, diretivas Blade (@extends, @section, @include, @if, @foreach) e menu de navegação |
+| **Tema 5** | `tema-5` / `tema-5-models-eloquent` | Model Aluno, migração e consultas Eloquent (scopes de curso, nome, recentes e contagem) |
+| **Tema 6** | `tema-6` / `tema-6-seeders` | AlunoFactory e AlunoSeeder gerando 10 alunos |
+| **Tema 7** | `tema-7` / `tema-7-crud` | CRUD completo funcional no AlunoController e Views |
+| **Tema 8** | `tema-8` / `tema-8-forms-requests` | AlunoRequest com validação avançada, mensagens personalizadas e formulário com feedback |
+| **Tema 9** | `tema-9` / `tema-9-relacionamentos` | Model Curso, chave estrangeira `curso_id`, relacionamentos hasMany/belongsTo e view detalhada |
+| **Tema 10** | `tema-10` / `tema-10-autenticacao` | Laravel Breeze, relacionamento User-Aluno e campo `role` ('admin' e 'professor') |
+| **Tema 11** | `tema-11` / `tema-11-middleware` | Middleware `CheckRole` para proteção de rotas restritas (`/admin` e `/professor`) |
+| **Tema 12** | `tema-12` / `tema-12-policies` | `AlunoPolicy` restringindo ações por perfil (Admin cadastra/exclui, Professor edita) |
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 📌 Histórico de Commits por Atividade
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. `ATV 1: Criar rotas /sobre, /alunos e /contato retornando texto`
+2. `ATV 2: Criar rotas com parametro /produto/{id}, /categoria/{id} e /usuario/{id}`
+3. `ATV 3: Criar o AlunoController`
+4. `ATV 4: Implementar as 7 rotas principais de CRUD no AlunoController`
+5. `ATV 5: Criar a pasta alunos nas views`
+6. `ATV 6: Crie as views principais (index, create, show, edit)`
+7. `ATV 7: Crie um layout para ser utilizado por outras paginas em /layouts/app.blade.php`
+8. `ATV 8: Criar paginas home e views de alunos usando layout`
+9. `ATV 9: Utilizar diretivas Blade e criar menu de navegacao compartilhado (Desafio)`
+10. `ATV 10: Criar o Model Aluno e migration correspondente`
+11. `ATV 11: Implementar consultas Eloquent de curso, nome, recentes e quantidade`
+12. `ATV 12: Criar o Seeder para Alunos e gerar 10 alunos`
+13. `ATV 13: Implementar o CRUD completo para Alunos no Controller e Views`
+14. `ATV 14: Criar o formulario de cadastro de Aluno completo com validacoes visuais`
+15. `ATV 15: Criar o Request para Alunos com validacoes e mensagens personalizadas (Desafio)`
+16. `ATV 16: Criar o Model Curso para se relacionar com Alunos`
+17. `ATV 17: Relacionar Aluno e Curso atraves de chave estrangeira curso_id (hasMany / belongsTo)`
+18. `Desafio Tema 9: Exibir em view todos os alunos vinculados a um curso`
+19. `ATV 18: Adicionar o Laravel Breeze no projeto com suporte a Blade`
+20. `ATV 19: Relacionar User com Aluno atraves de chave estrangeira user_id`
+21. `ATV 20: Adicionar campo role no User com dois tipos (admin e professor)`
+22. `ATV 21: Criar Middleware CheckRole para impedir acesso indevido em rotas como /admin e /professor`
+23. `ATV 22: Criar AlunoPolicy para proteger acoes sobre o registro de Aluno`
+24. `ATV 23: Implementar regras na AlunoPolicy (apenas Admin cria e exclui, Professor edita)`
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## 🚀 Como Executar o Projeto Localmente
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+### 1. Clonar o repositório ou abrir a pasta do projeto:
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+cd dionatan-II
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Instalar dependências PHP e JavaScript:
+```bash
+composer install
+npm install
+npm run build
+```
 
-## Contributing
+### 3. Configurar ambiente e chave de aplicação:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. Executar Migrações e Seeders:
+```bash
+php artisan migrate:fresh --seed
+```
+> O comando acima criará as tabelas, os usuários padrão (Admin e Professor), cursos e 10 alunos com matrículas e relacionamentos!
 
-## Code of Conduct
+### 5. Iniciar o servidor local:
+```bash
+php artisan serve
+```
+Acesse no navegador: `http://localhost:8000`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 🔐 Credenciais de Acesso para Teste
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+| Perfil | E-mail | Senha | Permissões |
+| :--- | :--- | :--- | :--- |
+| **Admin** | `admin@escola.com` | `password` | Acesso a `/admin`, cria alunos, edita alunos e exclui alunos |
+| **Professor** | `professor@escola.com` | `password` | Acesso a `/professor`, visualiza e edita alunos |
+| **Visitante** | (não logado) | - | Acesso público às páginas informativas e listagem |
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🧭 Principais Rotas e Endpoints
+
+### Rotas Gerais e CRUD
+- `GET /` e `GET /home` - Página inicial com layout compartilhado
+- `GET /sobre` - Página sobre (Tema 1)
+- `GET /contato` - Página contato (Tema 1)
+- `GET /produto/{id}` - Rota com parâmetro (Tema 1)
+- `GET /categoria/{id}` - Rota com parâmetro (Tema 1)
+- `GET /usuario/{id}` - Rota com parâmetro (Tema 1)
+- `GET /alunos` - Listagem de alunos (Tema 2, 3, 4, 7, 12)
+- `GET /alunos/create` - Formulário de cadastro (Protegido pela Policy: apenas Admin)
+- `POST /alunos` - Salvar aluno com validação pelo AlunoRequest (Apenas Admin)
+- `GET /alunos/{id}` - Ficha detalhada do aluno
+- `GET /alunos/{id}/edit` - Formulário de edição (Admin e Professor)
+- `PUT /alunos/{id}` - Atualizar aluno
+- `DELETE /alunos/{id}` - Excluir aluno (Apenas Admin)
+
+### Consultas Eloquent (Tema 5)
+- `GET /consultas/curso/{curso}` - Alunos filtrados pelo nome do curso
+- `GET /consultas/busca/{palavra}` - Alunos cujo nome contém o termo buscado
+- `GET /consultas/recentes` - Alunos cadastrados nos últimos 30 dias
+- `GET /consultas/quantidade` - Quantidade total de alunos registrados
+
+### Relacionamentos (Tema 9)
+- `GET /cursos/{curso}/alunos` - Exibe em view todos os alunos vinculados ao curso especificado
+
+### Autenticação & Áreas Restritas (Temas 10, 11 e 12)
+- `GET /login` e `GET /register` - Autenticação Laravel Breeze
+- `GET /dashboard` - Painel autenticado do usuário
+- `GET /admin` - Painel restrito a usuários com `role = 'admin'` (Middleware `role:admin`)
+- `GET /professor` - Painel restrito a `role = 'professor'` e `'admin'` (Middleware `role:professor,admin`)
