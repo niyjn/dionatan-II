@@ -2,27 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aluno;
 use Illuminate\Http\Request;
 
 class AlunoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * TEMA 7 - ATV 13: Listar alunos (index)
      */
     public function index()
     {
-        // Dados de exemplo para visualização inicial
-        $alunos = [
-            ['id' => 1, 'nome' => 'Ana Clara Silva', 'email' => 'ana@email.com', 'curso' => 'Engenharia de Software'],
-            ['id' => 2, 'nome' => 'Bruno Oliveira', 'email' => 'bruno@email.com', 'curso' => 'Ciência da Computação'],
-            ['id' => 3, 'nome' => 'Carlos Eduardo', 'email' => 'carlos@email.com', 'curso' => 'Sistemas de Informação'],
-        ];
-
+        $alunos = Aluno::latest()->get();
         return view('alunos.index', compact('alunos'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * TEMA 7 - ATV 13: Exibir formulário de cadastro (create)
      */
     public function create()
     {
@@ -30,42 +25,54 @@ class AlunoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * TEMA 7 - ATV 13: Salvar novo aluno no banco de dados (store)
      */
     public function store(Request $request)
     {
-        return redirect()->route('alunos.index');
+        Aluno::create($request->only(['nome', 'email', 'matricula', 'curso']));
+
+        return redirect()
+            ->route('alunos.index')
+            ->with('success', 'Aluno cadastrado com sucesso!');
     }
 
     /**
-     * Display the specified resource.
+     * TEMA 7 - ATV 13: Exibir detalhes de um aluno (show)
      */
-    public function show(string $id)
+    public function show(Aluno $aluno)
     {
-        return view('alunos.show', ['id' => $id]);
+        return view('alunos.show', compact('aluno'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * TEMA 7 - ATV 13: Exibir formulário de edição (edit)
      */
-    public function edit(string $id)
+    public function edit(Aluno $aluno)
     {
-        return view('alunos.edit', ['id' => $id]);
+        return view('alunos.edit', compact('aluno'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * TEMA 7 - ATV 13: Atualizar dados de um aluno (update)
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Aluno $aluno)
     {
-        return redirect()->route('alunos.index');
+        $aluno->update($request->only(['nome', 'email', 'matricula', 'curso']));
+
+        return redirect()
+            ->route('alunos.index')
+            ->with('success', 'Aluno atualizado com sucesso!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * TEMA 7 - ATV 13: Remover um aluno do banco de dados (destroy)
      */
-    public function destroy(string $id)
+    public function destroy(Aluno $aluno)
     {
-        return redirect()->route('alunos.index');
+        $aluno->delete();
+
+        return redirect()
+            ->route('alunos.index')
+            ->with('success', 'Aluno removido com sucesso!');
     }
 }
