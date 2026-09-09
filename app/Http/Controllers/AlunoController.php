@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AlunoRequest;
 use App\Models\Aluno;
 use Illuminate\Http\Request;
 
 class AlunoController extends Controller
 {
     /**
-     * TEMA 7 - ATV 13: Listar alunos (index)
+     * Listar alunos (index)
      */
     public function index()
     {
@@ -17,7 +18,7 @@ class AlunoController extends Controller
     }
 
     /**
-     * TEMA 7 - ATV 13: Exibir formulário de cadastro (create)
+     * Exibir formulário de cadastro (create)
      */
     public function create()
     {
@@ -25,11 +26,11 @@ class AlunoController extends Controller
     }
 
     /**
-     * TEMA 7 - ATV 13: Salvar novo aluno no banco de dados (store)
+     * Salvar novo aluno no banco de dados com validações do AlunoRequest (store)
      */
-    public function store(Request $request)
+    public function store(AlunoRequest $request)
     {
-        Aluno::create($request->only(['nome', 'email', 'matricula', 'curso']));
+        Aluno::create($request->validated());
 
         return redirect()
             ->route('alunos.index')
@@ -37,7 +38,7 @@ class AlunoController extends Controller
     }
 
     /**
-     * TEMA 7 - ATV 13: Exibir detalhes de um aluno (show)
+     * Exibir detalhes de um aluno (show)
      */
     public function show(Aluno $aluno)
     {
@@ -45,7 +46,7 @@ class AlunoController extends Controller
     }
 
     /**
-     * TEMA 7 - ATV 13: Exibir formulário de edição (edit)
+     * Exibir formulário de edição (edit)
      */
     public function edit(Aluno $aluno)
     {
@@ -53,11 +54,11 @@ class AlunoController extends Controller
     }
 
     /**
-     * TEMA 7 - ATV 13: Atualizar dados de um aluno (update)
+     * Atualizar dados de um aluno com validações do AlunoRequest (update)
      */
-    public function update(Request $request, Aluno $aluno)
+    public function update(AlunoRequest $request, Aluno $aluno)
     {
-        $aluno->update($request->only(['nome', 'email', 'matricula', 'curso']));
+        $aluno->update($request->validated());
 
         return redirect()
             ->route('alunos.index')
@@ -65,7 +66,7 @@ class AlunoController extends Controller
     }
 
     /**
-     * TEMA 7 - ATV 13: Remover um aluno do banco de dados (destroy)
+     * Remover um aluno do banco de dados (destroy)
      */
     public function destroy(Aluno $aluno)
     {
