@@ -77,3 +77,8 @@ Route::prefix('consultas')->group(function () {
         ]);
     });
 });
+// TEMA 9 - DESAFIO: Visualizar todos alunos de um curso (Relacionamento Eloquent)
+Route::get('/cursos/{curso}/alunos', function (\App\Models\Curso $curso) {
+    $curso->load('alunos');
+    return view('cursos.alunos', compact('curso'));
+})->name('cursos.alunos');
