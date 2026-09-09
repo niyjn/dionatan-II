@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlunoController;
+use App\Http\Controllers\ProfileController;
 use App\Models\Aluno;
+use App\Models\Curso;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
@@ -34,12 +36,11 @@ Route::get('/usuario/{id}', function ($id) {
     return "Detalhes do Usuário com ID: {$id}";
 });
 
-// TEMA 2 - ATV 4: 7 rotas principais de CRUD com AlunoController
+// TEMA 2 - ATV 4 & TEMA 7 - ATV 13: 7 rotas principais de CRUD com AlunoController
 Route::resource('alunos', AlunoController::class);
 
 // TEMA 5 - ATV 11: Consultas Eloquent
 Route::prefix('consultas')->group(function () {
-    // 1. Alunos de determinado curso
     Route::get('/curso/{curso}', function ($curso) {
         $alunos = Aluno::doCurso($curso)->get();
         return response()->json([
@@ -49,7 +50,6 @@ Route::prefix('consultas')->group(function () {
         ]);
     });
 
-    // 2. Alunos cujo nome contém determinada palavra
     Route::get('/busca/{palavra}', function ($palavra) {
         $alunos = Aluno::nomeContem($palavra)->get();
         return response()->json([
@@ -59,7 +59,6 @@ Route::prefix('consultas')->group(function () {
         ]);
     });
 
-    // 3. Alunos cadastrados recentemente
     Route::get('/recentes', function () {
         $alunos = Aluno::recentes()->get();
         return response()->json([
@@ -69,7 +68,6 @@ Route::prefix('consultas')->group(function () {
         ]);
     });
 
-    // 4. Quantidade de alunos
     Route::get('/quantidade', function () {
         return response()->json([
             'consulta' => 'Quantidade total de alunos',
@@ -77,8 +75,22 @@ Route::prefix('consultas')->group(function () {
         ]);
     });
 });
+
 // TEMA 9 - DESAFIO: Visualizar todos alunos de um curso (Relacionamento Eloquent)
-Route::get('/cursos/{curso}/alunos', function (\App\Models\Curso $curso) {
+Route::get('/cursos/{curso}/alunos', function (Curso $curso) {
     $curso->load('alunos');
     return view('cursos.alunos', compact('curso'));
 })->name('cursos.alunos');
+
+// TEMA 10 - ATV 18: Rotas do Laravel Breeze
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
