@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Aluno extends Model
 {
@@ -15,7 +16,16 @@ class Aluno extends Model
         'email',
         'matricula',
         'curso',
+        'curso_id',
     ];
+
+    /**
+     * TEMA 9 - ATV 17: Relacionamento BelongsTo com Curso
+     */
+    public function cursoRelacionado(): BelongsTo
+    {
+        return $this->belongsTo(Curso::class, 'curso_id');
+    }
 
     /**
      * TEMA 5 - ATV 11: Consulta para alunos de determinado curso
@@ -34,7 +44,7 @@ class Aluno extends Model
     }
 
     /**
-     * TEMA 5 - ATV 11: Consulta para alunos cadastrados recentemente (ex: últimos 30 dias)
+     * TEMA 5 - ATV 11: Consulta para alunos cadastrados recentemente
      */
     public function scopeRecentes(Builder $query, int $dias = 30): Builder
     {
