@@ -12,12 +12,21 @@ class Aluno extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'nome',
         'email',
         'matricula',
         'curso',
         'curso_id',
     ];
+
+    /**
+     * TEMA 10 - ATV 19: Relacionamento BelongsTo com User
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     /**
      * TEMA 9 - ATV 17: Relacionamento BelongsTo com Curso
