@@ -94,3 +94,15 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+// TEMA 11 - ATV 21: Middleware CheckRole protegendo /admin e /professor
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+});
+
+Route::middleware(['auth', 'role:professor,admin'])->group(function () {
+    Route::get('/professor', function () {
+        return view('professor.dashboard');
+    })->name('professor.dashboard');
+});
