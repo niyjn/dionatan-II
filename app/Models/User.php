@@ -22,6 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
         'password',
     ];
 
@@ -46,6 +47,24 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * TEMA 10 - ATV 20: Verificação de roles (admin e professor)
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isProfessor(): bool
+    {
+        return $this->role === 'professor';
+    }
+
+    public function hasRole(string $role): bool
+    {
+        return $this->role === $role;
     }
 
     /**
